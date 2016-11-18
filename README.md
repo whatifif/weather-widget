@@ -1,5 +1,23 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+## Project
+
+This project is to provide a weather widget and a weather widget editor that edits the widget itself.
+
+< Two Sites for this project >
+  
+1. Weather widget editor is provided from a main site and this site can edit and manage the widgets.
+   The generated widget codes are stored in MongoDB in this site.
+
+2. Weather widget is provided from a separate site and this site provides widget only.
+
+
+The reasons to run Two sites are:
+
+1. To scale up as microservice
+
+2. https protocol of heroku site does not allow unsecure script. Therefore widget cannot be loaded in iframe.
+
 
 ## Folder Structure
 
