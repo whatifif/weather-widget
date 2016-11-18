@@ -17,6 +17,7 @@ my-app/
     App.css
     App.js
     App.test.js
+    config.js
     index.css
     index.js
     logo.svg
