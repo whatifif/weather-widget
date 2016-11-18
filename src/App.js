@@ -2,31 +2,41 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import superagent from 'superagent';
+import config from './config';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {weather: [{description: null, main: null}], wind: {deg: null, speed: null}, showWind: false, units: null }
+    this.state = {title: '', weather: [{description: null, main: null}], wind: {deg: null, speed: null}, showWind: false, units: null }
   }
   componentWillMount() {
-    window.__showWind = true;
-    // window.showWind = false;
-    // window.__units = 'metric';
-    window.__units = 'imperial';
+    let params;
+    if(location.href.split('?')[1]){
+      params = location.href.split('?')[1].split('&');
+    }else{
+      params = ["title=Weather%20Widget", "showWind=true", "units=metric"];
+    }
+
+    let data = {};
+    for (let x = 0; x < params.length; x++) {
+      data[params[x].split('=')[0]] = params[x].split('=')[1];
+    }
+
+    const __title = decodeURI(data.title) || 'Weather Widget';
+    const __showWind = data.showWind === 'true' ? true : false;
+    const __units = data.units ? data.units : 'metric';
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
 
-        const api = "http://api.openweathermap.org/data/2.5/weather";
-        const APPID = "607b30ed81b1a987b170c14c6bc01d80";
+        const api = config.api;
+        const APPID = config.APPID;
         var pos = {
           lat: position.coords.latitude,
           lon: position.coords.longitude
         };
-        // const option = {units: 'metric'}
-        // const option = {units: 'imperial'}
-        const option = {units: window.__units}
+        const option = {title: __title, showWind: __showWind, units: __units}
         const KEY = {APPID}
         superagent
           .get(api)
@@ -37,12 +47,12 @@ class App extends Component {
           .end((err, res) => {
             const data = JSON.parse(res.text);
             this.setState({
+              title: option.title,
               weather:[{description:data.weather[0].description, main: data.weather[0].main}],
               wind: {deg: data.wind.deg, speed: data.wind.speed},
-              showWind: window.__showWind,
+              showWind: option.showWind,
               units: option.units
             });
-            console.log(data);
         });
 
       });
@@ -56,8 +66,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to weather widget</h2>
+          <h2>{this.state.title}</h2>
         </div>
         <div className="App-intro">
           {this.state.weather.map(function(item, index){
