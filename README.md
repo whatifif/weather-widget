@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-## Project
+## Project: Weather-Widget
 
 This project is to provide a weather widget and a weather widget editor that edits the widget itself.
 
