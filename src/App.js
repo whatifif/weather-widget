@@ -80,7 +80,7 @@ class App extends Component {
           <h2>{this.state.title}</h2>
         </div>
         <div className="App-intro">
-          {this.state.loading && <div className="App-loading"><img src={loadingImg}/></div>}
+          {this.state.loading && <div className="App-loading"><img src={loadingImg} alt="loading" /></div>}
           {this.state.loaded && this.state.weather.map(function(item, index){
             return (
               <div key={index}>
@@ -92,7 +92,7 @@ class App extends Component {
         </div>
         <p>&nbsp;</p>
         <div>
-          { this.state.showWind ? <div><h3>Wind</h3>deg: {this.state.wind.deg} speed: {this.state.wind.speed}  ({this.state.units})</div> : null }
+          { this.state.showWind ? <div><h3>Wind</h3>deg: {this.state.wind.deg} speed: {this.state.wind.speed}  (<span className="App-units">{this.state.units}</span>)</div> : null }
         </div>
       </div>
     );
