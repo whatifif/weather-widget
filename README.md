@@ -96,8 +96,18 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ### Since navigator.geolocation.getCurrentPosition requires https protocol in chrome browser
 ### Use firefox browser for this demonstaration
 
-the main site:
+the widget editor site:
 [http://13.54.49.146/weather](http://13.54.49.146/weather)
 
-the weather widget code:
+the widget site:
+[http://13.54.49.146/weather-widget](http://13.54.49.146/weather-widget)
+
+## Code
+
+the widget editor code:
+[https://github.com/whatifif/works](https://github.com/whatifif/works)
+Go to 'src/container/weather/weather.js'
+
+the widget code:
 [https://github.com/whatifif/weather-widget](https://github.com/whatifif/weather-widget)
+Go to 'src/App.js'
