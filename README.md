@@ -7,16 +7,16 @@ This project is to provide a weather widget and a weather widget editor that edi
 < Two Sites for this project >
   
 1. Weather widget editor is provided from a main site and this site can edit and manage the widgets.
-   The generated widget codes are stored in MongoDB in this site.
+   The generated widget codes are stored in MongoDB in this main site.
 
-2. Weather widget is provided from a separate site and this site provides widget only.
+2. Weather widget is provided from a separate site and this site provides a widget only.
 
 
 The reasons to run Two sites are:
 
-1. To scale up as microservice
+1. Separate developments are possible.
 
-2. https protocol of heroku site does not allow unsecure script. Therefore widget cannot be loaded in iframe.
+2. This can be scaled up as microservices
 
 
 ## Folder Structure
@@ -92,3 +92,12 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+### Demo
+# Since navigator.geolocation.getCurrentPosition requires https protocol in chrome browser
+# Use firefox browser for this demonstaration
+
+the main site:
+[http://13.54.49.146/weather](http://13.54.49.146/weather)
+
+the weather widget code:
+[https://github.com/whatifif/weather-widget](https://github.com/whatifif/weather-widget)
