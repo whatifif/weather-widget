@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
+import loadingImg from './ajax-loader.gif';
 import './App.css';
 import superagent from 'superagent';
 import config from './config';
@@ -7,7 +8,15 @@ import config from './config';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {title: '', weather: [{description: null, main: null}], wind: {deg: null, speed: null}, showWind: false, units: null }
+    this.state = {
+      title: '',
+      weather: [{description: null, main: null}],
+      wind: {deg: null, speed: null},
+      showWind: false,
+      units: 'metric',
+      loading: true,
+      loaded: false
+    }
   }
   componentWillMount() {
     let params;
@@ -51,7 +60,9 @@ class App extends Component {
               weather:[{description:data.weather[0].description, main: data.weather[0].main}],
               wind: {deg: data.wind.deg, speed: data.wind.speed},
               showWind: option.showWind,
-              units: option.units
+              units: option.units,
+              loading: false,
+              loaded: true
             });
         });
 
@@ -69,18 +80,19 @@ class App extends Component {
           <h2>{this.state.title}</h2>
         </div>
         <div className="App-intro">
-          {this.state.weather.map(function(item, index){
+          {this.state.loading && <div className="App-loading"><img src={loadingImg}/></div>}
+          {this.state.loaded && this.state.weather.map(function(item, index){
             return (
               <div key={index}>
                 <h3>Weather</h3>
-                <div>main: {item.main}</div>
-                <div>description: {item.description}</div>
+                <div>{item.main} : {item.description}</div>
               </div>
               );
           })}
         </div>
+        <p>&nbsp;</p>
         <div>
-          { this.state.showWind ? <div><h3>Wind (unit: {this.state.units})</h3>deg: {this.state.wind.deg} speed: {this.state.wind.speed} </div> : null }
+          { this.state.showWind ? <div><h3>Wind</h3>deg: {this.state.wind.deg} speed: {this.state.wind.speed}  ({this.state.units})</div> : null }
         </div>
       </div>
     );
